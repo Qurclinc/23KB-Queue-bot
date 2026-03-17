@@ -28,7 +28,7 @@ async def fetch_username(message: types.Message, state: FSMContext, session: Asy
     usertag = message.from_user.username
     student_create = StudentCreate(
         user_id=user_id,
-        usertag=usertag,
+        usertag=usertag[:32],
         username=username
     )
     res = await student_crud.create_student(student_create, session)

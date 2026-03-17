@@ -47,7 +47,7 @@ async def read_sign(
     res = await student_crud.update_student(StudentUpdate(
         user_id=message.from_user.id,
         usertag=message.from_user.username,
-        username=message.text
+        username=message.text[:32]
     ), session)
     if res:
         await message.answer("✅ Успешно изменено", reply_markup=await main_kb())

@@ -98,7 +98,7 @@ async def get_users_list(callback: types.CallbackQuery, session: AsyncSession):
     all_users = await student_crud.get_all(session)
     users_list = []
     for user in all_users:
-        line = f"{user.username}" + (f"(@{user.usertag})" if user.usertag else "") + f" - <code>{user.user_id}</code>"
+        line = f"{user.username[:32]}" + (f"(@{user.usertag})" if user.usertag else "") + f" - <code>{user.user_id}</code>"
         users_list.append(line)
     await callback.message.edit_text(
         text=f"Пользователи:\n\n{'\n'.join(users_list)}",
@@ -273,3 +273,9 @@ async def perform_action(
         await message.answer("❌ Не удалось выполнить действие.", reply_markup=await back_kb())
     
     await state.clear()
+    
+    
+@router.message("/dump")
+async def dump(message: types.Message):
+    #TODO: Когда-нибудь доделаю
+    pass
