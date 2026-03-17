@@ -114,7 +114,7 @@ async def view_queue_for_discipline(
     members = []
     for i, entry in enumerate(queue_entries):
         student = entry.student
-        line = f"{i + 1}. {student.username.strip()}" + (f"(@{student.usertag.strip()})" if student.usertag else "")
+        line = f"{i + 1}. {student.username.strip()[:32]}" + (f"(@{student.usertag.strip()})" if student.usertag else "")
         if student.user_id == callback.from_user.id:
             line = "<b><u>" + line + "</u></b>"
         members.append(line)
